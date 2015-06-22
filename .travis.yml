@@ -23,7 +23,7 @@ env:
     # Current stable Django.
     - TOXENV=py27-django18
     - TOXENV=py27-django18-taggit
-    - TOXENV=py27-django18-taggit-genericm2m TESTS_SKIP_LIVESERVER= EXTRAREQ="pytest-cov"
+    - TOXENV=py27-django18-taggit-genericm2m TESTS_SKIP_LIVESERVER=
     - TOXENV=py27-django18-genericm2m
     - TOXENV=py27-djangomaster
 
@@ -33,7 +33,7 @@ env:
     # Current stable Django.
     - TOXENV=py34-django18
     - TOXENV=py34-django18-taggit
-    - TOXENV=py34-django18-taggit-genericm2m TESTS_SKIP_LIVESERVER= EXTRAREQ="pytest-cov"
+    - TOXENV=py34-django18-taggit-genericm2m TESTS_SKIP_LIVESERVER=
     - TOXENV=py34-django18-genericm2m
     - TOXENV=py34-djangomaster
 
@@ -70,10 +70,10 @@ before_script:
   - if echo "$TOXENV" | grep postgresql; then psql -c 'create database autocomplete_light_test;' -U postgres; fi
   - RUN_TESTS="tox -- autocomplete_light"
   # Run tests either with or without coverage (being installed).
-  - command -v coveralls && RUN_TESTS="$RUN_TESTS --cov" || true
+  - command -v codecov && RUN_TESTS="$RUN_TESTS --cov" || true
 before_install:
   # Upgrade pip to 7.x for automatic installing from wheels.
-  - travis_retry pip install 'pip>7'
+  - travis_retry pip install 'pip>7' codecov
   - travis_retry npm install phantomjs
   - phantomjs --version
 script:
@@ -83,7 +83,7 @@ script:
   - diff /tmp/wheelhouse.before /tmp/wheelhouse.after || true
   - test -d .tox/$TOXENV/log && cat .tox/$TOXENV/log/*.log || true
 after_success:
-  - command -v coveralls && { coveralls; return $?; } || true
+  - codecov || true
 notifications:
   irc:
     channels:
