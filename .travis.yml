@@ -73,7 +73,7 @@ before_script:
   - command -v codecov && RUN_TESTS="$RUN_TESTS --cov" || true
 before_install:
   # Upgrade pip to 7.x for automatic installing from wheels.
-  - travis_retry pip install 'pip>7' codecov
+  - travis_retry pip install 'pip>7' codecov pytest-cov
   - travis_retry npm install phantomjs
   - phantomjs --version
 script:
