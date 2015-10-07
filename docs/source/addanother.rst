@@ -37,10 +37,10 @@ Create view
 A create view opened via the add-another button should return such a body::
 
     <script type="text/javascript">
-    opener.dismissAddAnotherPopup( 
-        window, 
-        "name of created model", 
-        "id of created model" 
+    opener.dismissAddAnotherPopup(
+        window,
+        "name of created model",
+        "id of created model"
     );
     </script>
 

@@ -23,9 +23,9 @@ First register the tag::
     al.register(Tag)
 
 Every form which should have the autocomplete taggit widget should look like::
-    
+
     from autocomplete_light.contrib.taggit_field import TaggitField, TaggitWidget
-        
+
     class AppEditForm(forms.ModelForm):
     tags = TaggitField(widget=TaggitWidget('TagAutocomplete'))
     class Meta:

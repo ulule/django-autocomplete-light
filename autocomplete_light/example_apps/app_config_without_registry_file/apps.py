@@ -9,7 +9,7 @@ class AppConfigWithoutRegistryFile(AppConfig):
 
         class AppConfigWithoutRegistryAutocomplete(
             autocomplete_light.AutocompleteListBase):
-        
+
             choices = ['a', 'b']
 
         autocomplete_light.register(AppConfigWithoutRegistryAutocomplete)

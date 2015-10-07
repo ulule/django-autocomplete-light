@@ -17,7 +17,7 @@ the choice uppon click.
 Styling choices
 ---------------
 
-By default, choices are rendered by the :py:meth:`choice_html() 
+By default, choices are rendered by the :py:meth:`choice_html()
 <autocomplete_light.autocomplete.base.AutocompleteBase.choice_html>` method.
 The result of this method will be used in the autocomplete box as well as in
 the :ref:`widget deck <widget-template>`. There are three easy ways to
@@ -25,7 +25,7 @@ customize it:
 
 - overriding :py:attr:`AutocompleteBase.choice_html_format <autocomplete_light.registry.AutocompleteBase.choice_html_format>`,
 - overriding :py:meth:`AutocompleteBase.choice_html() <autocomplete_light.autocomplete.base.AutocompleteBase.choice_html()>`,
-- or even with a template specified in :py:attr:`AutocompleteTemplate.choice_template <autocomplete_light.autocomplete.template.AutocompleteTemplate.choice_template>` 
+- or even with a template specified in :py:attr:`AutocompleteTemplate.choice_template <autocomplete_light.autocomplete.template.AutocompleteTemplate.choice_template>`
 
 Overriding :py:attr:`AutocompleteBase.choice_html_format <autocomplete_light.registry.AutocompleteBase.choice_html_format>`
 ```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
@@ -94,7 +94,7 @@ change form:
         <a href="{{ choice.get_absolute_url }}">
             {{ choice.first_name }} {{ choice.last_name }}
         </a>
-        
+
         <a href="{% url 'admin:persons_person_change' choice.pk %}">
             {% trans 'Edit person' %}
         </a>
@@ -121,14 +121,14 @@ choice, and it also tells ``widget.js`` that the value is ``{{ choice.pk }}``
 Styling autocomplete boxes
 --------------------------
 
-By default, the autocomplete box is rendered by the :py:meth:`autocomplete_html() 
+By default, the autocomplete box is rendered by the :py:meth:`autocomplete_html()
 <autocomplete_light.autocomplete.base.AutocompleteBase.autocomplete_html>` method.
 The result of this method will be used to render the autocomplete box. There
 are many ways to customize it:
 
 - overriding :py:attr:`AutocompleteBase.autocomplete_html_format <autocomplete_light.registry.AutocompleteBase.autocomplete_html_format>`,
 - overriding :py:meth:`AutocompleteBase.autocomplete_html() <autocomplete_light.autocomplete.base.AutocompleteBase.autocomplete_html()>`,
-- or even with a template specified in :py:attr:`AutocompleteTemplate.autocomplete_template <autocomplete_light.autocomplete.template.AutocompleteTemplate.autocomplete_template>` 
+- or even with a template specified in :py:attr:`AutocompleteTemplate.autocomplete_template <autocomplete_light.autocomplete.template.AutocompleteTemplate.autocomplete_template>`
   if using :py:class:`AutocompleteTemplate <autocomplete_light.autocomplete.template.AutocompleteTemplate>` for rendering logic.
 
 Overriding :py:attr:`AutocompleteBase.autocomplete_html_format <autocomplete_light.registry.AutocompleteBase.autocomplete_html_format>`
@@ -167,14 +167,14 @@ For example:
                 %s
             </span>
         '''
-        
+
         def autocomplete_html(self):
             html = ''.join(
                 [self.choice_html(c) for c in self.choices_for_request()])
 
             if not html:
                 html = self.empty_html_format % _('no matches found').capitalize()
-            
+
             count = len(self.choices_for_request())
             return self.autocomplete_html_format % (count, html)
 
@@ -227,7 +227,7 @@ If no choice is found, then it will display a user friendly suggestion.
 Styling widgets
 ---------------
 
-Widgets are rendered by the :py:meth:`~autocomplete_light.widgets.WidgetBase.render` 
+Widgets are rendered by the :py:meth:`~autocomplete_light.widgets.WidgetBase.render`
 method. By default, it renders `autocomplete_light/widget.html`. While you can
 override the widget template globally, there are two ways to override the
 widget template name on a per-case basis:

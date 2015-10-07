@@ -9,6 +9,6 @@ class YourModel(models.Model):
 
     name2 = models.CharField(max_length=100, null=True, blank=True)
     date_and_time = models.DateTimeField(null=True, blank=True)
-    
+
     def __str__(self):
         return self.name

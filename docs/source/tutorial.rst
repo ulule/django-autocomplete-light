@@ -163,7 +163,7 @@ Then, you can use :py:class:`autocomplete_light.ModelForm
 Note that the first Autocomplete class registered for a model becomes the
 default Autocomplete for that model. If you have registered several
 Autocomplete classes for a given model, you probably want to use a different
-Autocomplete class depending on the form using 
+Autocomplete class depending on the form using
 :py:attr:`Meta.autocomplete_names <autocomplete_light.forms.ModelForm.autocomplete_names>`:
 
 .. code-block:: python
@@ -178,7 +178,7 @@ respects ``Meta.fields`` and ``Meta.exclude``. However, you can enable or
 disable :py:class:`autocomplete_light.ModelForm
 <autocomplete_light.forms.ModelForm>`'s behaviour in the same fashion with
 :py:attr:`Meta.autocomplete_fields <autocomplete_light.forms.ModelForm.autocomplete_fields>`
-and 
+and
 :py:attr:`Meta.autocomplete_exclude <autocomplete_light.forms.ModelForm.autocomplete_exclude>`:
 
 .. code-block:: python

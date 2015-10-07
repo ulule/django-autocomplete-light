@@ -63,22 +63,22 @@ buildbot configuration to enable CI on the 28 supported configurations:
 
     def make_build(python, django, genericm2m, taggit):
         name = 'py%s-dj%s' % (python, django)
-    
+
         if genericm2m != '0':
             name += '-genericm2m'
         if taggit != '0':
             name += '-taggit'
-    
+
         slavenames = ['example-slave']
         if python == '2.7':
             slavenames.append('gina')
-    
+
         factory = BuildFactory()
         # check out the source
         factory.addStep(Git(repourl='https://github.com/yourlabs/django-autocomplete-light.git', mode='incremental'))
         # run the tests (note that this will require that 'trial' is installed)
         factory.addStep(ShellCommand(command=["./test.sh"], timeout=3600))
-    
+
         c['builders'].append(
             BuilderConfig(name=name,
                 slavenames=slavenames,
@@ -91,7 +91,7 @@ buildbot configuration to enable CI on the 28 supported configurations:
                 }
             )
         )
-    
+
         c['schedulers'].append(SingleBranchScheduler(
                             name="all-%s" % name,
                             change_filter=filter.ChangeFilter(branch='v2'),
@@ -100,21 +100,21 @@ buildbot configuration to enable CI on the 28 supported configurations:
         c['schedulers'].append(ForceScheduler(
                             name="force-%s" % name,
                             builderNames=[name]))
-    
-    
+
+
     c['builders'] = []
     djangos = ['1.4', '1.5', '1.6']
     pythons = ['2.7', '3.3']
-    
+
     for python in pythons:
         for django in djangos:
             if python == '3.3' and django == '1.4':
                 continue
-    
+
             for genericm2m in ['0','1']:
                 for taggit in ['0','1']:
                     make_build(python, django, genericm2m, taggit)
-    
+
 Why not use Widget.Media ?
 --------------------------
 
@@ -162,9 +162,9 @@ For example:
 
     class Person(models.Model):
         name = models.CharField(
-            max_length=100, 
+            max_length=100,
             blank=True,
-            verbose_name='Person name', 
+            verbose_name='Person name',
             help_text='Please fill in the complete person name'
         )
 

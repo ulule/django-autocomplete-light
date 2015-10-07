@@ -11,7 +11,7 @@ if django.VERSION < (1, 7):
 
     from django.contrib import admin
     admin.autodiscover()
- 
+
 try:
     from hvad_autocomplete import urls as hvad
 except ImportError:

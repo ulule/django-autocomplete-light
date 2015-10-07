@@ -1,7 +1,7 @@
 Form, fields and widgets
 ========================
 
-.. note:: This chapter assumes that you have been through 
+.. note:: This chapter assumes that you have been through
           :doc:`tutorial` and :doc:`autocomplete`.
 
 Design documentation
@@ -9,15 +9,15 @@ Design documentation
 
 This app provides optionnal helpers to make forms:
 
-- :py:func:`autocomplete_light.modelform_factory <autocomplete_light.forms.modelform_factory>` 
+- :py:func:`autocomplete_light.modelform_factory <autocomplete_light.forms.modelform_factory>`
   which wraps around django's modelform_factory but uses the heroic
   :py:class:`autocomplete_light.ModelForm <autocomplete_light.forms.ModelForm>`.
-- :py:class:`autocomplete_light.ModelForm <autocomplete_light.forms.ModelForm>`: 
-  the heroic ModelForm which ties all our loosely coupled tools together: 
+- :py:class:`autocomplete_light.ModelForm <autocomplete_light.forms.ModelForm>`:
+  the heroic ModelForm which ties all our loosely coupled tools together:
 
     - :py:class:`~autocomplete_light.forms.SelectMultipleHelpTextRemovalMixin`,
       which removes the "Hold down control or command to select more
-      than one" help text on autocomplete widgets (fixing `Django ticket #9321 
+      than one" help text on autocomplete widgets (fixing `Django ticket #9321
       <https://code.djangoproject.com/ticket/9321>`_),
     - :py:class:`~autocomplete_light.forms.VirtualFieldHandlingMixin`
       which enables support for generic foreign keys,
@@ -45,9 +45,9 @@ simple field classes:
     - :py:class:`autocomplete_light.GenericModelChoiceField <autocomplete_light.fields.GenericModelChoiceField>`, and
     - :py:class:`autocomplete_light.GenericModelMultipleChoiceField <autocomplete_light.fields.GenericModelMultipleChoiceField>`.
 
-.. _widget-template: 
+.. _widget-template:
 
-In the very same fashion, :py:class:`autcomplete_light.WidgetBase <autocomplete_light.widgets.WidgetBase>` 
+In the very same fashion, :py:class:`autcomplete_light.WidgetBase <autocomplete_light.widgets.WidgetBase>`
 renders a template which should contain:
 
 - a hidden ``<select>`` field containing real field values,
@@ -98,7 +98,7 @@ of the box:
 Assuming that you have registered an ``Autocomplete`` for ``FullModel`` **and**
 a generic ``Autocomplete``, then :py:class:`autocomplete_light.ModelForm
 <autocomplete_light.forms.ModelForm>` will contain 5 autocompletion fields by
-default: `oto`, `fk`, `mtm`, `gfk` and `gmtm`. 
+default: `oto`, `fk`, `mtm`, `gfk` and `gmtm`.
 
 .. code-block:: python
 
@@ -166,7 +166,7 @@ You might want to use form fields directly for any reason:
 Considering the model of the above example, this is how you could do it:
 
 .. code-block:: python
-    
+
     class FullModelModelForm(autocomplete_light.ModelForm):
         # Demonstrate how to use a form field directly
         oto = autocomplete_light.ModelChoiceField('FullModelAutocomplete')
@@ -192,7 +192,7 @@ You can use this form in the admin too, it can look like this:
 .. code-block:: python
 
     from django.contrib import admin
-    
+
     from forms import OrderForm
     from models import Order
 

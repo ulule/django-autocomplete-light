@@ -13,7 +13,7 @@ Any class which implements
 :py:class:`~autocomplete_light.autocomplete.base.AutocompleteInterface` is
 guaranteed to work because it provides the methods that are expected by the
 view which serves autocomplete contents from ajax, and the methods that are
-expected by the form field for validation and by the form widget for rendering. 
+expected by the form field for validation and by the form widget for rendering.
 
 However, implementing those methods directly would result in duplicate code,
 hence :py:class:`~autocomplete_light.autocomplete.base.AutocompleteBase`. It
@@ -96,9 +96,9 @@ class name by default.
 
     Another way of achieving the above using the :ref:`register <register>`
     shortcut could be:
-    
+
     .. code-block:: python
-    
+
         autocomplete_light.register(autocomplete_light.AutocompleteListBase,
             name='OsAutocomplete', choices=['Linux', 'BSD', 'Minix'])
 
@@ -124,13 +124,13 @@ Inheriting from
 of :py:class:`~autocomplete_light.autocomplete.AutocompleteListBase` like as
 show in the **previous** example enables two optionnal options:
 
-- :py:attr:`~autocomplete_light.autocomplete.template.AutocompleteTemplate.autocomplete_template` 
+- :py:attr:`~autocomplete_light.autocomplete.template.AutocompleteTemplate.autocomplete_template`
   which we have customized, if we hadn't then
   :py:meth:`AutocompleteTemplate.choice_html()
   <autocomplete_light.autocomplete.template.AutocompleteTemplate.choice_html>` would have fallen
   back on the parent :py:meth:`AutocompleteBase.choice_html()
   <autocomplete_light.autocomplete.base.AutocompleteBase.choice_html>`,
-- :py:attr:`~autocomplete_light.autocomplete.template.AutocompleteTemplate.choice_template` 
+- :py:attr:`~autocomplete_light.autocomplete.template.AutocompleteTemplate.choice_template`
   which we haven't set, so :py:meth:`AutocompleteTemplate.choice_html()
   <autocomplete_light.autocomplete.template.AutocompleteTemplate.choice_html>` will fall back on
   the parent :py:meth:`AutocompleteBase.choice_html()
@@ -138,12 +138,12 @@ show in the **previous** example enables two optionnal options:
 
 See :ref:`autocomplete-design` for details.
 
-.. note:: 
+.. note::
 
     Another way of achieving the above could be:
-    
+
     .. code-block:: python
-    
+
         autocomplete_light.register(autocomplete_light.AutocompleteListTemplate,
             name='OsAutocomplete', choices=['Linux', 'BSD', 'Minix'],
             autocomplete_template='your_autocomplete_box.html')
@@ -162,7 +162,7 @@ Registering a custom Autocomplete class for your model in
         search_fields = ['^first_name', 'last_name']
     autocomplete_light.register(Person, PersonAutocomplete)
 
-In the same fashion, you could have used 
+In the same fashion, you could have used
 :py:class:`~autocomplete_light.autocomplete.AutocompleteModelTemplate`
 instead of
 :py:class:`~autocomplete_light.autocomplete.AutocompleteModelBase`. You can see
@@ -176,8 +176,8 @@ that the inheritance diagram follows the same pattern:
     An equivalent of this example would be:
 
     .. code-block:: python
-        
-        autocomplete_light.register(Person, 
+
+        autocomplete_light.register(Person,
             search_fields=['^first_name', 'last_name'])
 
 .. _security:
@@ -206,7 +206,7 @@ on the request user could look like this:
 
 It is very important to note here, that `clean()` **will** raise a
 ``ValidationError`` if a model is selected in a
-``ModelChoiceField`` or ``ModelMultipleChoiceField`` 
+``ModelChoiceField`` or ``ModelMultipleChoiceField``
 
 .. note:: Use at your own discretion, as this can cause problems when a choice
           is no longer part of the queryset, just like with django's Select
@@ -224,8 +224,8 @@ This code registers an autocomplete with name ``ContactAutocomplete``:
 To register two autocompletes with the same class, pass in a name argument:
 
 .. code-block:: python
-    
-    autocomplete_light.register(ContactAutocomplete, name='Person', 
+
+    autocomplete_light.register(ContactAutocomplete, name='Person',
         choices=Person.objects.filter(is_company=False))
     autocomplete_light.register(ContactAutocomplete, name='Company',
         choices=Person.objects.filter(is_company=True))

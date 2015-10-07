@@ -350,7 +350,7 @@ class ModelFormBaseMixin(BaseModelFormMixin):
         autocomplete_light.registry.register(SpecialAutocomplete)
 
         ModelForm = autocomplete_light.modelform_factory(self.model_class,
-            autocomplete_names={'relation': 'SpecialAutocomplete'}, 
+            autocomplete_names={'relation': 'SpecialAutocomplete'},
             exclude=[])
 
         self.form = ModelForm()

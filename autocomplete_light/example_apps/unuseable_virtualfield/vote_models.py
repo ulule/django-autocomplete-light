@@ -50,7 +50,7 @@ class VoteManger(models.Manager):
                     'object_id':content_object.pk
                     })
         return super(VoteManger, self).filter(*args, **kwargs)
-    
+
 class Vote(models.Model):
     user = models.ForeignKey(AUTH_USER_MODEL)
     content_type = models.ForeignKey(ContentType)
@@ -59,7 +59,7 @@ class Vote(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
 
     objects = VoteManger()
-    
+
     class Meta:
         unique_together = ('user', 'content_type', 'object_id')
         app_label = 'unuseable_virtualfield'
@@ -72,7 +72,7 @@ class Vote(models.Model):
         }
         if instance is not None:
             kwargs["object_id"] = instance.pk
-            
+
         return cls.objects.filter(**kwargs)
 
 try:
@@ -94,11 +94,11 @@ class VotedQuerySet(QuerySet):
     """
     if call votes.annotate with an `user` argument then add `is_voted` to each instance
     """
-    
+
     def __init__(self, model=None, query=None, using=None, user=None):
         self.user = user
         super(VotedQuerySet, self).__init__(model=model, query=query, using=using)
-        
+
     def __iter__(self):
         super(VotedQuerySet, self).__iter__()
         if self.user is None:
@@ -108,23 +108,23 @@ class VotedQuerySet(QuerySet):
         user_id = self.user.id
         contenttype = ContentType.objects.get_for_model(self.model)
         object_ids = [r.id for r in objects]
-        
+
         voted_users = defaultdict(list)
         votes = Vote.objects.filter(content_type=contenttype, object_id__in=object_ids)
         for v in votes:
             voted_users[v.object_id].append(v.user_id)
-            
+
         for r in objects:
             r.is_voted = user_id in voted_users.get(r.id, [])
 
         self._result_cache = objects
         return iter(objects)
-    
+
     def _clone(self):
         c = super(VotedQuerySet, self)._clone()
         c.user = self.user
         return c
-    
+
 class _VotableManager(models.Manager):
     def __init__(self, through, model, instance, field_name='votes'):
         self.through = through
@@ -135,7 +135,7 @@ class _VotableManager(models.Manager):
     @instance_required
     def up(self, user):
         self.through(user=user, content_object=self.instance).save()
-        
+
     @instance_required
     def down(self, user):
         self.through.objects.filter(user=user, content_object=self.instance).delete()
@@ -153,14 +153,14 @@ class _VotableManager(models.Manager):
         queryset = queryset if queryset is not None else self.model.objects.all()
         queryset = queryset.annotate(**kwargs).order_by(order, '-id')
         return VotedQuerySet(model=queryset.model, query=queryset.query, user=user)
-        
+
 class VotableManager(GenericRelation):
     def __init__(self, through=Vote, manager=_VotableManager, **kwargs):
         self.through = through
         self.manager = manager
         kwargs['verbose_name'] = kwargs.get('verbose_name', _('Votes'))
         super(VotableManager, self).__init__(self.through, **kwargs)
-        
+
     def __get__(self, instance, model):
         if instance is not None and instance.pk is None:
             raise ValueError("%s objects need to have a primary key value "

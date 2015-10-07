@@ -221,15 +221,15 @@ Hence the widget.js HTML cookbook:
         data-widget-maximum-values="3"
     >
 
-        <!-- 
+        <!--
         Expected structure: have an input, it can set override default
         autocomplete options with data-autocomplete-* attributes, naming
         conversion is done by jQuery.data().
         -->
-        <input 
-            type="text" 
+        <input
+            type="text"
             data-autocomplete-minimum-characters="0"
-            data-autocomplete-url="/foo" 
+            data-autocomplete-url="/foo"
         />
 
         <!--

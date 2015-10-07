@@ -19,7 +19,7 @@ to render the autocomplete. For example:
 
     from django import shortcuts
     from django.db.models import Q
-    
+
     from autocomplete_light.example_apps.music.models import Artist, Genre
 
     def navigation_autocomplete(request,
@@ -28,7 +28,7 @@ to render the autocomplete. For example:
         q = request.GET.get('q', '')
 
         queries = {}
-        
+
         queries['artists'] = Artist.objects.filter(
             Q(name__icontains=q) |
             Q(genre__name__icontains=q)
@@ -51,7 +51,7 @@ would work:
     <span class="separator">Genres</span>
     {% for genre in genre %}
     <a class="block choice" href="{{ genre.get_absolute_url }}">{{ genre }}</a>
-    {% endfor %}    
+    {% endfor %}
 
 A basic autocomplete configuration
 ----------------------------------

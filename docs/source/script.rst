@@ -1,7 +1,7 @@
 Scripts: the javascript side of autocompletes
 =============================================
 
-.. note:: This chapter assumes that you have been through 
+.. note:: This chapter assumes that you have been through
           :doc:`tutorial` and :doc:`autocomplete` and :doc:`form`.
 
 Design documentation
@@ -77,7 +77,7 @@ Then you can use it to make a global navigation autocomplete using
 ``autocomplete.js`` directly.  It can look like this:
 
 .. code-block:: javascript
-    
+
     // Make a javascript Autocomplete object and set it up
     var autocomplete = $('#yourInput').yourlabsAutocomplete({
         url: '{% url "your_autocomplete_url" %}',
@@ -254,7 +254,7 @@ autocomplete object. Which makes chaining autocompletes with other form fields
 as easy as:
 
 .. code-block:: javascript
-    
+
     $('#country').change(function() {
         $('#yourInput').yourlabsAutocomplete().data = {
             'country': $(this).val();
@@ -269,11 +269,11 @@ Overriding widget JS methods
 The widget js plugin will only bootstrap widgets which have
 ``data-bootstrap="normal"``. Which means that you should first name your new
 bootstrapping method to ensure that the default behaviour doesn't get in the
-way. 
+way.
 
 .. code-block:: python
 
-    autocomplete_light.register(City, 
+    autocomplete_light.register(City,
         widget_attrs={'data-widget-bootstrap': 'your-custom-bootstrap'})
 
 .. note::
@@ -302,7 +302,7 @@ Now, you can instanciate the widget yourself like this:
                     // This is the method that returns the value to use for the
                     // hidden select option based on the HTML of the selected
                     // choice.
-                    //  
+                    //
                     // This is where you could make a non-async post request to
                     // this.autocomplete.url for example. The default is:
                     return choice.data('id')
