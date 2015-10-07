@@ -1,3 +1,7 @@
+2.2.9
+
+    [JAL] #12: Use exisiting input value for initial autocomplete query
+
 2.2.8
 
     #478, #472: "change related button" isn't clickable when it shouldn't.
