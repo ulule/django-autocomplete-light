@@ -114,3 +114,35 @@ class FullModel(models.Model):
 
     def __str__(self):
         return self.name
+
+
+@python_2_unicode_compatible
+class MtmLeftModel(models.Model):
+    name = models.CharField(max_length=128)
+    relation = models.ManyToManyField('MtmRightModel',
+            through='MtmMiddleModel')
+
+    noise = models.ForeignKey('FkModel', null=True, blank=True)
+
+    for_inline = models.ForeignKey('self', null=True, blank=True,
+                                   related_name='inline')
+
+    def __str__(self):
+        return self.name
+
+
+class MtmMiddleModel(models.Model):
+    left = models.ForeignKey('MtmLeftModel', related_name='left_of')
+    right = models.ForeignKey('MtmRightModel', related_name='right_of')
+    for_inline = models.ForeignKey('self', null=True, blank=True,
+                                   related_name='reverse_for_inline')
+
+
+@python_2_unicode_compatible
+class MtmRightModel(models.Model):
+    name = models.CharField(max_length=128)
+    for_inline = models.ForeignKey('self', null=True, blank=True,
+                                   related_name='reverse_for_inline')
+
+    def __str__(self):
+        return self.name

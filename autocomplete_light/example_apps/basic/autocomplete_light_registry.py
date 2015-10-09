@@ -2,7 +2,7 @@ import autocomplete_light.shortcuts as autocomplete_light
 
 from .models import *
 
-models = [OtoModel, FkModel, MtmModel, GfkModel]
+models = [OtoModel, FkModel, MtmModel, GfkModel, MtmLeftModel]
 
 try:
     import genericm2m

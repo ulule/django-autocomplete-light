@@ -35,3 +35,5 @@ for model in models:
         'form': ModelForm, 'inlines': [Inline]})
 
     admin.site.register(model, ModelAdmin)
+
+admin.site.register(MtmLeftModel)
