@@ -102,6 +102,11 @@ class VirtualFieldHandlingMixin(forms.BaseModelForm):
             if value:
                 setattr(self.instance, field.name, value)
 
+                # Required for django-linguist
+                # https://github.com/yourlabs/django-autocomplete-light/pull/341/files
+                if not hasattr(value, '_meta'):
+                    continue
+
                 self.cleaned_data[field.ct_field] = \
                     ContentType.objects.get_for_model(value)
                 self.cleaned_data[field.fk_field] = value.pk
@@ -391,6 +396,11 @@ class ModelFormMetaclass(DjangoModelFormMetaclass):
         # Add generic fk and m2m autocompletes
         for field in meta.model._meta.virtual_fields:
             if cls.skip_field(meta, field):
+                continue
+
+            # Required for django-linguist
+            # https://github.com/yourlabs/django-autocomplete-light/pull/341/files
+            if not hasattr(field, 'fk_field'):
                 continue
 
             if hasattr(meta.model._meta, 'get_field'):
